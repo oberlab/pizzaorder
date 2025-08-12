@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oberlab Pizza Management</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🛠️</span>
+        <span>Oberlab Pizza – Management</span>
+      </div>
+      <div class="status" id="manager-status"></div>
+    </header>
+
+    <main class="container">
+      <section class="manager-auth" id="manager-auth"></section>
+
+      <section class="config">
+        <h2>PayPal-Empfänger</h2>
+        <div class="row">
+          <input id="paypal-email" type="email" placeholder="paypal@example.com" />
+          <button id="save-paypal" class="primary">Speichern</button>
+        </div>
+      </section>
+
+      <section class="pizzas-link">
+        <h2>Pizza-Konfiguration</h2>
+        <div class="row">
+          <a class="primary" href="/manage_pizzas.html">Editor öffnen</a>
+          <a id="download-pizzas" href="/api/pizzas/export">JSON herunterladen</a>
+        </div>
+      </section>
+
+      <section class="orders">
+        <h2>Bestellungen</h2>
+        <div class="row">
+          <button id="toggle-orders" class="warn">Bestellen schließen</button>
+        </div>
+        <div id="orders-list" class="orders-list"></div>
+      </section>
+
+      <section class="summary-pizzas">
+        <h2>Zusammenfassung</h2>
+        <div id="pizza-summary" class="summary-list"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="/">Zurück zur Bestellung</a>
+      <span>•</span>
+      <a href="/clear_cookies?next=%2Fmanage.html">Cookies löschen</a>
+    </footer>
+
+    <script src="/manage.js"></script>
+  </body>
+  </html>

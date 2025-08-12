@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Oberlab Pizza bestellen</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🍕</span>
+        <span>Oberlab Pizza</span>
+      </div>
+      <div class="status" id="order-status"></div>
+    </header>
+
+    <div id="closed-banner" class="banner-closed" hidden>
+      Bestellen ist geschlossen – Zahlungen sind weiterhin möglich.
+    </div>
+
+    <section class="banner" id="manager-banner" hidden>
+      <strong>Management-Link:</strong>
+      <a id="manager-link" href="#">Öffnen und Manager werden</a>
+    </section>
+
+    <main class="container">
+      <div id="consent-overlay" class="modal-overlay" hidden>
+        <div class="modal">
+          <h3>Cookies & Name</h3>
+          <p>Wir verwenden Cookies für die Bestell‑Session und speichern deinen Namen für die Bestellung.</p>
+          <label for="consent-name">Dein Name</label>
+          <input id="consent-name" type="text" placeholder="z.B. Max" />
+          <div class="row" style="justify-content:flex-end;margin-top:8px;gap:8px">
+            <button id="consent-accept" class="primary" disabled>Akzeptieren</button>
+          </div>
+        </div>
+      </div>
+      <section class="who">
+        <label for="who-name">Dein Name</label>
+        <input id="who-name" type="text" placeholder="z.B. Max" />
+      </section>
+
+      <section class="menu">
+        <h2>Speisekarte</h2>
+        <div id="pizza-list" class="cards"></div>
+      </section>
+
+      <section class="summary">
+        <div class="totals">
+          <span>Gesamt:</span>
+          <span id="grand-total">0,00 €</span>
+        </div>
+        <div class="actions">
+          <button id="pay-btn" class="primary" disabled>Mit PayPal zahlen</button>
+        </div>
+        <div class="hint" id="pay-hint">PayPal noch nicht freigeschaltet.</div>
+        <div id="cart-list" class="cart"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="/manage.html">Management</a>
+      <span>•</span>
+      <span id="ordering-open">Bestellung geöffnet</span>
+      <span>•</span>
+      <a href="/clear_cookies?next=%2F" id="clear-cookies">Cookies löschen</a>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+  </html>
+

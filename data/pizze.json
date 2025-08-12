@@ -1,0 +1,90 @@
+{
+  "pizzas": [
+    {
+      "id": "marg",
+      "name": "Margherita",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Basilikum blubb"
+      ],
+      "price": 7.5
+    },
+    {
+      "id": "salami",
+      "name": "Salami",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Salami"
+      ],
+      "price": 8.5
+    },
+    {
+      "id": "funghi",
+      "name": "Funghi",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Champignons"
+      ],
+      "price": 8.5
+    },
+    {
+      "id": "hawaii",
+      "name": "Hawaii",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Schinken",
+        "Ananas"
+      ],
+      "price": 9.0
+    },
+    {
+      "id": "tonno",
+      "name": "Tonno",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Thunfisch",
+        "Zwiebel"
+      ],
+      "price": 9.5
+    },
+    {
+      "id": "quattro",
+      "name": "Quattro Formaggi",
+      "ingredients": [
+        "Mozzarella",
+        "Gorgonzola",
+        "Parmesan",
+        "Emmentaler"
+      ],
+      "price": 10.5
+    },
+    {
+      "id": "diavola",
+      "name": "Diavola",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Scharfe Salami",
+        "Peperoni"
+      ],
+      "price": 9.5
+    },
+    {
+      "id": "veggie",
+      "name": "Vegetariana",
+      "ingredients": [
+        "Tomate",
+        "Mozzarella",
+        "Paprika",
+        "Oliven",
+        "Zwiebel"
+      ],
+      "price": 9.0
+    }
+  ]
+}

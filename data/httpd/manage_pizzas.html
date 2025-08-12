@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pizza-Konfiguration</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo">🍕</span>
+        <span>Pizza-Konfiguration</span>
+      </div>
+      <div class="status" id="manager-status"></div>
+    </header>
+    <main class="container">
+      <section class="pizzas">
+        <div class="row">
+          <button id="add-pizza">Pizza hinzufügen</button>
+          <label class="file">
+            <input id="json-file" type="file" accept="application/json" />
+            <span>JSON hochladen</span>
+          </label>
+          <button id="save-pizzas" class="primary">Speichern</button>
+          <a id="download-pizzas" href="/api/pizzas/export">JSON herunterladen</a>
+        </div>
+        <div id="pizza-editor" class="editor"></div>
+      </section>
+    </main>
+    <footer class="footer">
+      <a href="/manage.html">Zurück zum Management</a>
+    </footer>
+    <script src="/manage_pizzas.js"></script>
+  </body>
+  </html>
+
