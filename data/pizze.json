@@ -1,90 +1,323 @@
 {
   "pizzas": [
     {
-      "id": "marg",
-      "name": "Margherita",
+      "id": "bruschetta",
+      "name": "Bruschetta",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
-        "Basilikum blubb"
+        "Weißbrot",
+        "Tomaten",
+        "Zwiebel",
+        "Knoblauch",
+        "Oregano",
+        "Basilikum"
       ],
-      "price": 7.5
+      "price": 9.9
     },
     {
-      "id": "salami",
-      "name": "Salami",
+      "id": "caprese",
+      "name": "Caprese",
       "ingredients": [
-        "Tomate",
+        "Tomaten",
         "Mozzarella",
+        "Rucola"
+      ],
+      "price": 10.9
+    },
+    {
+      "id": "pizzabrot",
+      "name": "Pizzabrot",
+      "ingredients": [
+        "Knoblauch",
+        "ohne Mozzarella"
+      ],
+      "price": 8.5
+    },
+    {
+      "id": "pizza-margherita",
+      "name": "Pizza Margherita",
+      "ingredients": [
+        "Tomatensauce",
+        "Mozzarella"
+      ],
+      "price": 10.9
+    },
+    {
+      "id": "pizza-napoli",
+      "name": "Pizza Napoli",
+      "ingredients": [
+        "Basilikum",
+        "Oregano",
+        "Olivenöl"
+      ],
+      "price": 11.9
+    },
+    {
+      "id": "pizza-salami",
+      "name": "Pizza Salami",
+      "ingredients": [
         "Salami"
       ],
-      "price": 8.5
+      "price": 11.9
     },
     {
-      "id": "funghi",
-      "name": "Funghi",
+      "id": "pizza-funghi",
+      "name": "Pizza Funghi",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
         "Champignons"
       ],
-      "price": 8.5
+      "price": 11.9
     },
     {
-      "id": "hawaii",
-      "name": "Hawaii",
+      "id": "pizza-prosciutto",
+      "name": "Pizza Prosciutto",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
-        "Schinken",
+        "Vorderschinken"
+      ],
+      "price": 11.9
+    },
+    {
+      "id": "pizza-regina",
+      "name": "Pizza Regina",
+      "ingredients": [
+        "Vorderschinken",
+        "Champignons"
+      ],
+      "price": 12.9
+    },
+    {
+      "id": "pizza-hawaii",
+      "name": "Pizza Hawaii",
+      "ingredients": [
+        "Vorderschinken",
         "Ananas"
       ],
-      "price": 9.0
+      "price": 12.9
     },
     {
-      "id": "tonno",
-      "name": "Tonno",
+      "id": "pizza-spinat",
+      "name": "Pizza Spinat",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
+        "Blattspinat",
+        "Ei"
+      ],
+      "price": 13.9
+    },
+    {
+      "id": "pizza-diavola",
+      "name": "Pizza Diavola",
+      "ingredients": [
+        "Peperoni",
+        "scharfe Salami"
+      ],
+      "price": 13.9
+    },
+    {
+      "id": "pizza-tonno",
+      "name": "Pizza Tonno",
+      "ingredients": [
         "Thunfisch",
-        "Zwiebel"
+        "Zwiebeln"
       ],
-      "price": 9.5
+      "price": 13.9
     },
     {
-      "id": "quattro",
-      "name": "Quattro Formaggi",
+      "id": "calzone",
+      "name": "Calzone",
       "ingredients": [
-        "Mozzarella",
-        "Gorgonzola",
-        "Parmesan",
-        "Emmentaler"
+        "Vorderschinken",
+        "Champignons"
       ],
-      "price": 10.5
+      "price": 13.9
     },
     {
-      "id": "diavola",
-      "name": "Diavola",
+      "id": "pizza-siciliana",
+      "name": "Pizza Siciliana",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
-        "Scharfe Salami",
+        "Oliven",
+        "Sardellen",
+        "Kapern"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-spinat-mit-gorgonzola",
+      "name": "Pizza Spinat mit Gorgonzola",
+      "ingredients": [
+        "Blattspinat",
+        "Gorgonzola"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-quattro-formaggi",
+      "name": "Pizza Quattro Formaggi",
+      "ingredients": [
+        "4 Käsesorten"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-capricciosa",
+      "name": "Pizza Capricciosa",
+      "ingredients": [
+        "Vorderschinken",
+        "Champignons",
+        "Artischocken",
+        "Oliven"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-sucuk",
+      "name": "Pizza Sucuk",
+      "ingredients": [
+        "Knoblauchwurst",
+        "Zwiebeln"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-primavera",
+      "name": "Pizza Primavera",
+      "ingredients": [
+        "Paprika",
+        "Zwiebeln",
+        "Mais",
+        "Oliven",
+        "Peperoni",
+        "Artischocken"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "pizza-atom",
+      "name": "Pizza Atom",
+      "ingredients": [
+        "scharfe Salamis",
+        "Peperoni",
+        "Paprika",
+        "Oliven"
+      ],
+      "price": 15.9
+    },
+    {
+      "id": "pizza-frutti-di-mare",
+      "name": "Pizza Frutti di Mare",
+      "ingredients": [
+        "Meeresfrüchte",
+        "Zwiebeln"
+      ],
+      "price": 15.9
+    },
+    {
+      "id": "pizza-special",
+      "name": "Pizza Special",
+      "ingredients": [
+        "Rindersalami",
+        "Champignon",
+        "Paprika",
         "Peperoni"
       ],
-      "price": 9.5
+      "price": 15.9
     },
     {
-      "id": "veggie",
-      "name": "Vegetariana",
+      "id": "pizza-quattro-stagioni",
+      "name": "Pizza Quattro Stagioni",
       "ingredients": [
-        "Tomate",
-        "Mozzarella",
+        "Vorderschinken",
+        "Champignons",
+        "Oliven",
+        "Peperoni",
+        "Artischocken"
+      ],
+      "price": 15.9
+    },
+    {
+      "id": "pizza-portone",
+      "name": "Pizza Portone",
+      "ingredients": [
+        "Sucuk",
+        "Rucola",
+        "Parmesan"
+      ],
+      "price": 16.9
+    },
+    {
+      "id": "pizza-anatolien",
+      "name": "Pizza Anatolien",
+      "ingredients": [
+        "Sucuk",
         "Paprika",
         "Oliven",
-        "Zwiebel"
+        "Zwiebeln",
+        "Feta",
+        "Cherry-Tomaten",
+        "Rucola"
       ],
-      "price": 9.0
+      "price": 16.9
+    },
+    {
+      "id": "pizza-allem-drum-und-dran",
+      "name": "Pizza Allem Drum und Dran",
+      "ingredients": [
+        "Salami",
+        "Vorderschinken",
+        "Champignons",
+        "Peperoni",
+        "Zwiebeln",
+        "Oliven",
+        "Mais",
+        "Cherry-Tomaten",
+        "Rucola",
+        "Parmesan"
+      ],
+      "price": 19.9
+    },
+    {
+      "id": "sandwich-basic",
+      "name": "Sandwich Basic",
+      "ingredients": [
+        "Pesto",
+        "Mozzarella",
+        "Cherry-Tomaten",
+        "Oliven",
+        "Rucola"
+      ],
+      "price": 13.9
+    },
+    {
+      "id": "sandwich-tonno",
+      "name": "Sandwich Tonno",
+      "ingredients": [
+        "Knoblauchöl",
+        "Zwiebeln",
+        "Mozzarella",
+        "Salatblatt",
+        "Thunfisch"
+      ],
+      "price": 14.9
+    },
+    {
+      "id": "sandwich-sucuk",
+      "name": "Sandwich Sucuk",
+      "ingredients": [
+        "gegrillte Sucuk",
+        "Zwiebeln",
+        "Knoblauchöl",
+        "Mozzarella",
+        "Feta",
+        "Rucola"
+      ],
+      "price": 15.9
+    },
+    {
+      "id": "kinderpizza-caprisun",
+      "name": "Kinderpizza + Caprisun",
+      "ingredients": [
+        "Auswahl: Margherita/Salami/Schinken/Fungi",
+        "Caprisun"
+      ],
+      "price": 9.9
     }
   ]
 }
