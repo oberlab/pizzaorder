@@ -24,12 +24,11 @@
   }
 
   let retry = 0;
-  let useAlt = true; // prefer ESP32 port 81
   function wsUrl(){
     const proto = location.protocol === 'https:' ? 'wss' : 'ws';
     const q = token ? `?token=${encodeURIComponent(token)}` : '';
-    if (useAlt) return `${proto}://${location.hostname}:81/${q ? q : ''}`;
-    return `${proto}://${location.host}/ws${q}`;
+    const host = location.hostname.includes(':') ? `[${location.hostname}]` : location.hostname;
+    return `${proto}://${host}:81/${q ? q : ''}`;
   }
 
   function connect(){
@@ -47,7 +46,6 @@
       setStatus('Getrennt – verbinde erneut …', false);
       const delay = Math.min(1000, 200 * Math.pow(2, Math.min(retry, 3))) + Math.floor(Math.random()*150);
       retry++;
-      if (retry === 2) useAlt = !useAlt; // toggle between endpoints
       setTimeout(connect, delay);
     };
   }
@@ -138,4 +136,3 @@
   setStatus('Verbinde …');
   connect();
 })();
-

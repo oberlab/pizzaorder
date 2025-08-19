@@ -30,6 +30,7 @@ struct State {
 };
 
 extern State g_state;
+extern bool g_manager_logged_in; // true, sobald der Manager-Login erfolgte
 
 void load_state_from_fs();
 void save_pizzas_to_fs();
@@ -37,4 +38,3 @@ void save_settings_to_fs();
 
 // utilities
 String random_token(size_t n = 22);
-

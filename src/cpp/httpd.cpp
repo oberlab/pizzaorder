@@ -1,6 +1,7 @@
 #include <WebServer.h>
 #include <SPIFFS.h>
 #include <Arduino.h>
+#include <WiFi.h>
 #include "httpd.h"
 #include "status.h"
 #include <ArduinoJson.h>
@@ -29,6 +30,31 @@ static bool servePath(String path){
 }
 
 void setup_httpd(){
+  // Collect a few headers for richer diagnostics on 404s
+  static const char* HDRS[] = {
+    "Host", "User-Agent", "Accept", "Accept-Language", "Accept-Encoding",
+    "Origin", "Referer", "Connection", "Upgrade",
+    "Sec-WebSocket-Version", "Sec-WebSocket-Key"
+  };
+  httpd.collectHeaders(HDRS, sizeof(HDRS)/sizeof(HDRS[0]));
+
+  // Light-weight handlers to avoid noisy 404 logs from common browser requests
+  httpd.on("/favicon.ico", [](){ httpd.send(204); });
+  httpd.on("/ws", [](){ httpd.send(426, "text/plain", "WebSocket: bitte Port 81 verwenden"); });
+  httpd.on("/manage.html", [](){
+    // mark manager as logged in when token matches
+    bool ok = false;
+    if (httpd.hasArg("token")){
+      String tok = httpd.arg("token");
+      if (tok == g_state.cfg.manager_token) ok = true;
+    }
+    if (ok){
+      g_manager_logged_in = true;
+    }
+    if (!servePath("/manage.html")){
+      httpd.send(404, "text/plain", "Not Found");
+    }
+  });
   httpd.on("/api/state", [](){
     // minimal primer state for clients
     DynamicJsonDocument doc(8192);
@@ -54,7 +80,22 @@ void setup_httpd(){
   });
 
   httpd.onNotFound([](){
-    if (!servePath(httpd.uri())){
+    // Detailed diagnostics for requests ohne Handler/Datei
+    String uri = httpd.uri();
+    HTTPMethod m = httpd.method();
+    const char* mname = (m==HTTP_GET?"GET": m==HTTP_POST?"POST": m==HTTP_PUT?"PUT": m==HTTP_DELETE?"DELETE": m==HTTP_PATCH?"PATCH": m==HTTP_OPTIONS?"OPTIONS":"OTHER");
+    IPAddress rip = httpd.client().remoteIP();
+    Serial.printf("HTTP 404: %s %s from %s\n", mname, uri.c_str(), rip.toString().c_str());
+    int nArgs = httpd.args();
+    for (int i=0;i<nArgs;i++){
+      Serial.printf("  arg[%s]=%s\n", httpd.argName(i).c_str(), httpd.arg(i).c_str());
+    }
+    int nHdr = httpd.headers();
+    for (int i=0;i<nHdr;i++){
+      Serial.printf("  hdr[%s]=%s\n", httpd.headerName(i).c_str(), httpd.header(i).c_str());
+    }
+    bool served = servePath(uri);
+    if (!served){
       httpd.send(404, "text/plain", "Not Found");
     }
   });

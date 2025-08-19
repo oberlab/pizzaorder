@@ -127,11 +127,10 @@
   }
 
   let retry = 0;
-  let useAlt = true; // prefer ESP32 WS on :81 first
   function wsUrl(){
     const proto = location.protocol === 'https:' ? 'wss' : 'ws';
-    if (useAlt) return `${proto}://${location.hostname}:81/`;
-    return `${proto}://${location.host}/ws`;
+    const host = location.hostname.includes(':') ? `[${location.hostname}]` : location.hostname;
+    return `${proto}://${host}:81/`;
   }
   function connect(){
     const url = wsUrl();
@@ -149,7 +148,6 @@
       state.ws = null;
       const delay = Math.min(1000, 200 * Math.pow(2, Math.min(retry, 3))) + Math.floor(Math.random()*150);
       retry++;
-      if (retry === 2) useAlt = !useAlt; // toggle between 81 and /ws after a couple retries
       setTimeout(connect, delay);
     };
   }

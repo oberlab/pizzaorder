@@ -4,6 +4,7 @@
 #include "status.h"
 
 State g_state;
+bool g_manager_logged_in = false;
 
 static const char* PIZZAS_PATH = "/pizze.json";
 static const char* SETTINGS_PATH = "/settings.json"; // kept for compatibility; ignored for runtime

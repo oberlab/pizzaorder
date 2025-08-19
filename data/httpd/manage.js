@@ -30,12 +30,11 @@
   }
 
   let retry = 0;
-  let useAlt = true; // prefer ESP32 port 81 first
   function wsUrl(){
     const proto = location.protocol === 'https:' ? 'wss' : 'ws';
     const qs = token ? `?token=${encodeURIComponent(token)}` : '';
-    if (useAlt) return `${proto}://${location.hostname}:81/${qs ? qs : ''}`;
-    return `${proto}://${location.host}/ws${qs}`;
+    const host = location.hostname.includes(':') ? `[${location.hostname}]` : location.hostname;
+    return `${proto}://${host}:81/${qs ? qs : ''}`;
   }
   function connect(){
     const ws = new WebSocket(wsUrl());
@@ -52,7 +51,6 @@
       setStatus('Getrennt – verbinde erneut …', false);
       const delay = Math.min(1000, 200 * Math.pow(2, Math.min(retry, 3))) + Math.floor(Math.random()*150);
       retry++;
-      if (retry === 2) useAlt = !useAlt; // toggle between 81 and /ws
       setTimeout(connect, delay);
     };
   }
@@ -70,15 +68,37 @@
       const card = document.createElement('div');
       card.className = 'order-card';
       const statusText = o.paid ? `Bezahlt (${o.method||''})` : (o.method === 'paypal' || o.method === 'paypal_started' ? 'PayPal gestartet' : 'Offen');
+      const nameVal = (o.name || '');
+      const editedItems = items.map(([pid,q])=>{
+        const p = pizzasById[pid];
+        const label = (p?.name)||pid;
+        return `<div class="mini-edit">
+          <span class="mini-name">${label}</span>
+          <button data-act="dec" data-sid="${sid}" data-pid="${pid}">−</button>
+          <span class="mini-qty">${q}</span>
+          <button data-act="inc" data-sid="${sid}" data-pid="${pid}">+</button>
+        </div>`;
+      }).join('');
+      const options = state.pizzas.map(p=>`<option value="${p.id}">${p.name}</option>`).join('');
+      const addCtrl = `
+        <div class="add-control">
+          <button data-sid="${sid}" data-action="toggle-add">Add</button>
+          <span class="add-ui" data-sid="${sid}" hidden>
+            <select class="add-select" data-sid="${sid}">${options}</select>
+            <button data-sid="${sid}" data-action="confirm-add">Add</button>
+            <button data-sid="${sid}" data-action="cancel-add">Cancel</button>
+          </span>
+        </div>`;
       card.innerHTML = `
         <div class="order-head">
-          <strong>${o.name || 'Unbenannt'}</strong>
+          <input class="mgr-name" data-sid="${sid}" value="${nameVal.replace(/\\/g,'\\\\').replace(/"/g,'&quot;')}" />
           <div>
             <span>${euro(total)}</span>
             <span style="margin-left:8px;${o.paid? 'color:#1ee38f':''}">${statusText}</span>
           </div>
         </div>
-        <div class="order-items">${items.map(([pid,q])=>`${q}× ${(pizzasById[pid]?.name)||pid}`).join(', ') || '—'}</div>
+        <div class="order-items">${editedItems || '—'}</div>
+        ${addCtrl}
         <div class="row" style="margin-top:8px">
           <button data-sid="${sid}" data-method="cash">Bar bezahlt</button>
           <button data-sid="${sid}" data-method="paypal">PayPal bezahlt</button>
@@ -151,8 +171,38 @@
     const sid = btn.dataset.sid;
     const method = btn.dataset.method;
     const action = btn.dataset.action;
+    const act = btn.dataset.act;
+    const pid = btn.dataset.pid;
+    if (sid && action === 'toggle-add'){
+      const ui = els.ordersList.querySelector(`.add-ui[data-sid="${sid}"]`);
+      if (ui) ui.hidden = !ui.hidden; return;
+    }
+    if (sid && action === 'cancel-add'){
+      const ui = els.ordersList.querySelector(`.add-ui[data-sid="${sid}"]`);
+      if (ui) ui.hidden = true; return;
+    }
+    if (sid && action === 'confirm-add'){
+      const sel = els.ordersList.querySelector(`select.add-select[data-sid="${sid}"]`);
+      const val = sel && sel.value;
+      if (val){ send({type:'add_item', sid, pizza_id: val, delta: +1}); }
+      const ui = els.ordersList.querySelector(`.add-ui[data-sid="${sid}"]`);
+      if (ui) ui.hidden = true;
+      return;
+    }
     if (sid && method){ send({type:'mark_paid', sid, method}); }
     if (sid && action === 'unpaid'){ send({type:'mark_unpaid', sid}); }
+    if (sid && act && pid){
+      const delta = act === 'inc' ? +1 : -1;
+      send({type:'add_item', sid, pizza_id: pid, delta});
+    }
+  });
+  // Name ändern (Blur/Change)
+  els.ordersList.addEventListener('change', (e) => {
+    const input = e.target.closest('input.mgr-name');
+    if (!input) return;
+    const sid = input.dataset.sid;
+    const name = input.value || '';
+    send({type:'set_user', sid, name});
   });
   els.toggleOrders.addEventListener('click', () => {
     send({type: state.orderingOpen ? 'close_orders' : 'open_orders'});
